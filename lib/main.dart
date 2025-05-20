@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginScreen(),
         '/cadastro': (context) => CadastroScreen(),
-        '/home': (context) => HomeScreen(),
+        '/home': (context) => FeedScreen(),
       },
     );
   }

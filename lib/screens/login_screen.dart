@@ -30,13 +30,13 @@ if (_emailController.text.trim().isNotEmpty &&
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+      MaterialPageRoute(builder: (context) => FeedScreen()),
     );
   } else {
 
       Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+      MaterialPageRoute(builder: (context) => FeedScreen()),
     );
   }
 }
