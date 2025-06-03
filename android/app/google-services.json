@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "211922933489",
+    "project_id": "movefy-270d0",
+    "storage_bucket": "movefy-270d0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211922933489:android:df6140b9ed1691456cbb50",
+        "android_client_info": {
+          "package_name": "com.example.movefy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcCEfa2X1HN0EpPgkDU9zWz6JNxUIdgBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
