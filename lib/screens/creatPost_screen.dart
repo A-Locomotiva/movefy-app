@@ -5,9 +5,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Post App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: PostScreen(),
     );
   }
@@ -90,9 +88,10 @@ class _PostScreenState extends State<PostScreen> {
                   counterText: '$_currentLength/$_maxLength',
                   counterStyle: TextStyle(
                     fontSize: 12,
-                    color: _currentLength > _maxLength
-                        ? Colors.red
-                        : Colors.grey[600],
+                    color:
+                        _currentLength > _maxLength
+                            ? Colors.red
+                            : Colors.grey[600],
                   ),
                 ),
               ),
@@ -145,11 +144,12 @@ class _PostScreenState extends State<PostScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: _currentLength > 0 && _currentLength <= _maxLength
-                    ? () {
-                        // publicar
-                      }
-                    : null,
+                onPressed:
+                    _currentLength > 0 && _currentLength <= _maxLength
+                        ? () {
+                          // publicar
+                        }
+                        : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF4285F4),
                   padding: EdgeInsets.symmetric(vertical: 16),
