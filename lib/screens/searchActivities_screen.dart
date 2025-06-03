@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MoveFyApp());
-}
-
 class MoveFyApp extends StatelessWidget {
   const MoveFyApp({Key? key}) : super(key: key);
 

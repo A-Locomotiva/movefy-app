@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:movefy/screens/cadastro_screen.dart';
+import 'package:movefy/screens/createPassword_screen.dart';
+import 'package:movefy/screens/profilePage_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
 
@@ -30,6 +32,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginScreen(),
         '/cadastro': (context) => SignupScreen(),
         '/home': (context) => FeedScreen(),
+        '/createpassword': (context) => NewPasswordScreen(),
+        '/post': (context) => PostScreen(),
+        'profile': (context) => ProfileScreen()
       },
     );
   }
