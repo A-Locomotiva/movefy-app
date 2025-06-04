@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MovefyApp extends StatelessWidget {
   @override
@@ -101,21 +103,53 @@ class SignupScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    // TODO: ação de criar conta
+                  onPressed: () async {
+                    try {
+                      // Cria o usuário no Firebase Auth
+                      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim(),
+                      );
+
+                      await FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(credential.user!.uid)
+                        .set({
+                      'email': credential.user!.email,
+                      'name': nameController.text.trim(), // Se houver um campo de nome
+                    });
+
+                      // Se chegou aqui, o cadastro foi bem-sucedido
+                      // Navega para a tela inicial (substituindo a tela atual)
+                      Navigator.pushReplacementNamed(context, '/home');
+
+                    } on FirebaseAuthException catch (e) {
+                      // Trata erros específicos do Firebase
+                      String errorMessage;
+                      if (e.code == 'weak-password') {
+                        errorMessage = 'Senha muito fraca. Use uma senha mais forte.';
+                      } else if (e.code == 'email-already-in-use') {
+                        errorMessage = 'Este e-mail já está cadastrado.';
+                      } else {
+                        errorMessage = 'Erro ao criar conta: ${e.message}';
+                      }
+
+                      // Mostra um SnackBar com o erro
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(errorMessage)),
+                      );
+                    } catch (e) {
+                      // Erro genérico
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Ocorreu um erro inesperado.')),
+                      );
+                    }
                   },
-                  child: Text(
-                    "Criar Conta",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ), // cor branca na fonte
-                  ),
+                  child: Text("Criar Conta", style: TextStyle(color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF6557D9),
                     minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
 
