@@ -1,67 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:movefy/screens/profilePage_screen.dart';
+import 'package:movefy/screens/searchActivities_screen.dart';
 
-class MyApp extends StatelessWidget {
+class FeedHomeScreen extends StatefulWidget {
+  const FeedHomeScreen({Key? key}) : super(key: key);
+
+  @override
+  _FeedHomeScreenState createState() => _FeedHomeScreenState();
+}
+
+class _FeedHomeScreenState extends State<FeedHomeScreen> {
+  int _currentIndex = 0;
+
+  // Lista de telas para a BottomNavigationBar
+  final List<Widget> _screens = [
+    _FeedContent(), // Conteúdo do feed diretamente aqui
+    ActivitySearchScreen(),
+    ProfileScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        primaryColor: Colors.blue[700],
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blue[700],
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: _currentIndex == 0 ? AppBar(title: Text('Início')) : null,
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) => setState(() => _currentIndex = index),
+        selectedItemColor: Color(0xFF4285F4),
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Início',
           ),
-          iconTheme: IconThemeData(color: Colors.white),
-        ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Colors.blue[700],
-        ),
-        textTheme: TextTheme(
-          bodyLarge: TextStyle(color: Colors.black),
-          bodyMedium: TextStyle(color: Colors.black87),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Atividades',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Perfil',
+          ),
+        ],
       ),
-      home: FeedScreen(),
+      floatingActionButton: _currentIndex == 0
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/post');
+              },
+              child: Icon(Icons.add, color: Colors.white),
+            )
+          : null,
     );
   }
 }
 
-class FeedScreen extends StatelessWidget {
+// Widget com o conteúdo do feed (antigo FeedScreen)
+class _FeedContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Início')),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-        children: [
-          _buildPostCard(
-            username: 'João Silva',
-            content: 'Legenda com localização',
-            comment: 'Ótimo lugar para correr!',
-          ),
-          _buildPostCard(
-            username: 'Maria Souza',
-            content: 'Procuro pessoas para jogar futebol',
-          ),
-          _buildPostCard(
-            username: 'Carlos Mendes',
-            content: 'Procuro pessoas para praticar ciclismo',
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => PostScreen()),
-          );
-        },
-        child: Icon(Icons.add, color: Colors.white),
-      ),
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      children: [
+        _buildPostCard(
+          username: 'João Silva',
+          content: 'Legenda com localização',
+          comment: 'Ótimo lugar para correr!',
+        ),
+        _buildPostCard(
+          username: 'Maria Souza',
+          content: 'Procuro pessoas para jogar futebol',
+        ),
+        _buildPostCard(
+          username: 'Carlos Mendes',
+          content: 'Procuro pessoas para praticar ciclismo',
+        ),
+      ],
     );
   }
 
@@ -79,10 +94,8 @@ class FeedScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header: Avatar + Username
             Row(
               children: [
-                // Avatar placeholder
                 Container(
                   width: 40,
                   height: 40,
@@ -99,7 +112,6 @@ class FeedScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
-            // Content
             Text(content, style: TextStyle(fontSize: 15)),
             if (comment != null) ...[
               const SizedBox(height: 12),
@@ -113,7 +125,6 @@ class FeedScreen extends StatelessWidget {
               ),
             ],
             const SizedBox(height: 16),
-            // Action Buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -137,21 +148,6 @@ class FeedScreen extends StatelessWidget {
         style: TextStyle(color: Colors.grey[700], fontSize: 14),
       ),
       style: TextButton.styleFrom(foregroundColor: Colors.grey[700]),
-    );
-  }
-}
-
-class PostScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Criar Postagem')),
-      body: Center(
-        child: Text(
-          'Conteúdo da tela de postagem',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
     );
   }
 }

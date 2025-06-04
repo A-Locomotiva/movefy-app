@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (userCredential.user != null) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => FeedScreen()),
+          MaterialPageRoute(builder: (context) => FeedHomeScreen()),
         );
       }
     } catch (error) {
