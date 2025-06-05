@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
+//import 'resetPassword_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -99,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // Adicionar navegação para tela de recuperação de senha
+                      Navigator.pushNamed(context, '/resetpassword');
                     },
                     child: Text(
                       'Esqueci minha senha',

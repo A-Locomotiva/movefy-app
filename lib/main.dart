@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:movefy/screens/cadastro_screen.dart';
-import 'package:movefy/screens/createPassword_screen.dart';
+import 'package:movefy/screens/resetPassword_screen.dart';
 import 'package:movefy/screens/profilePage_screen.dart';
 import 'package:movefy/screens/home_screen.dart'; // Arquivo combinado
 import 'package:movefy/screens/login_screen.dart';
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginScreen(),
         '/cadastro': (context) => SignupScreen(),
         '/home': (context) => FeedHomeScreen(), // Tela combinada
-        '/createpassword': (context) => NewPasswordScreen(),
+        '/resetpassword': (context) => ForgotPasswordScreen(),
         '/post': (context) => PostScreen(),
         '/profile': (context) => ProfileScreen(),
         '/activities': (context) => ActivitySearchScreen(),
