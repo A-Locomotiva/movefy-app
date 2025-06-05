@@ -28,26 +28,29 @@ class SignupScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Image.asset('assets/logo.png', height: 120),
+                Image.asset(
+                  'lib/assets/logo.png',
+                  height: 120,
+                  fit: BoxFit.contain,
+                ),
                 SizedBox(height: 24),
                 Text(
                   "Crie sua conta",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 24),
-                ElevatedButton.icon(
+                OutlinedButton.icon(
                   onPressed: () {
-                    // TODO: ação de login com Google
+                    // Adicionar lógica de login com Google
                   },
-                  icon: Image.asset('assets/google_icon.png', height: 24),
-                  label: Text(
-                    "Continuar com google",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    side: BorderSide(color: Colors.grey.shade300),
+                  icon: Icon(Icons.g_mobiledata, size: 24, color: Colors.red),
+                  label: Text('Entrar com o Google'),
+                  style: OutlinedButton.styleFrom(
                     minimumSize: Size(double.infinity, 50),
+                    side: BorderSide(color: Colors.teal),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
                 SizedBox(height: 16),
@@ -160,7 +163,7 @@ class SignupScreen extends StatelessWidget {
                     Text("Já tem uma conta? "),
                     GestureDetector(
                       onTap: () {
-                        // TODO: Navegar para a tela de login
+                        Navigator.pushReplacementNamed(context, '/');
                       },
                       child: Text(
                         "Entrar",
