@@ -43,11 +43,11 @@ class SignupScreen extends StatelessWidget {
                   onPressed: () {
                     // Adicionar lógica de login com Google
                   },
-                  icon: Icon(Icons.g_mobiledata, size: 24, color: Colors.red),
+                  icon: Image.asset('lib/assets/google_logo.png', height: 24),
                   label: Text('Entrar com o Google'),
                   style: OutlinedButton.styleFrom(
                     minimumSize: Size(double.infinity, 50),
-                    side: BorderSide(color: Colors.teal),
+                    side: BorderSide(color: Colors.blue),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -108,54 +108,52 @@ class SignupScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () async {
                     try {
-                      // Cria o usuário no Firebase Auth
-                      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: emailController.text.trim(),
-                        password: passwordController.text.trim(),
-                      );
+                      final credential = await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim(),
+                          );
 
                       await FirebaseFirestore.instance
-                        .collection('users')
-                        .doc(credential.user!.uid)
-                        .set({
-                      'email': credential.user!.email,
-                      'name': nameController.text.trim(), // Se houver um campo de nome
-                    });
+                          .collection('users')
+                          .doc(credential.user!.uid)
+                          .set({
+                            'email': credential.user!.email,
+                            'name': nameController.text.trim(),
+                          });
 
-                      // Se chegou aqui, o cadastro foi bem-sucedido
-                      // Navega para a tela inicial (substituindo a tela atual)
                       Navigator.pushReplacementNamed(context, '/home');
-
                     } on FirebaseAuthException catch (e) {
-                      // Trata erros específicos do Firebase
                       String errorMessage;
                       if (e.code == 'weak-password') {
-                        errorMessage = 'Senha muito fraca. Use uma senha mais forte.';
+                        errorMessage =
+                            'Senha muito fraca. Use uma senha mais forte.';
                       } else if (e.code == 'email-already-in-use') {
                         errorMessage = 'Este e-mail já está cadastrado.';
                       } else {
                         errorMessage = 'Erro ao criar conta: ${e.message}';
                       }
-
-                      // Mostra um SnackBar com o erro
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(errorMessage)),
-                      );
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(errorMessage)));
                     } catch (e) {
-                      // Erro genérico
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Ocorreu um erro inesperado.')),
                       );
                     }
                   },
-                  child: Text("Criar Conta", style: TextStyle(color: Colors.white)),
+                  child: Text(
+                    "Criar Conta",
+                    style: TextStyle(color: Colors.white),
+                  ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF6557D9),
+                    backgroundColor: Colors.blue,
                     minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
-
                 SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +166,7 @@ class SignupScreen extends StatelessWidget {
                       child: Text(
                         "Entrar",
                         style: TextStyle(
-                          color: Color(0xFF6557D9),
+                          color: Colors.blue,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

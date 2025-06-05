@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
-//import 'resetPassword_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -97,14 +96,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 10),
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.center,
                   child: TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/resetpassword');
                     },
                     child: Text(
                       'Esqueci minha senha',
-                      style: TextStyle(color: Colors.teal),
+                      style: TextStyle(color: Colors.blue),
                     ),
                   ),
                 ),
@@ -112,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ElevatedButton(
                   onPressed: _login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.teal,
+                    backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
                     minimumSize: Size(double.infinity, 50),
                     shape: RoundedRectangleBorder(
@@ -141,11 +140,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     // Adicionar lógica de login com Google
                   },
-                  icon: Icon(Icons.g_mobiledata, size: 24, color: Colors.red),
+                  icon: Image.asset('lib/assets/google_logo.png', height: 24),
                   label: Text('Entrar com o Google'),
                   style: OutlinedButton.styleFrom(
                     minimumSize: Size(double.infinity, 50),
-                    side: BorderSide(color: Colors.teal),
+                    side: BorderSide(color: Colors.blue),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -164,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Cadastre-se',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.teal,
+                          color: Colors.blue,
                         ),
                       ),
                     ),
