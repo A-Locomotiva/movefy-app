@@ -1,13 +1,11 @@
 name: movefy
 description: "A new Flutter project."
-publish_to: 'none' 
-
+publish_to: 'none'
 
 version: 1.0.0+1
 
 environment:
   sdk: ^3.7.2
-
 
 dependencies:
   flutter:
@@ -20,20 +18,21 @@ dependencies:
   cupertino_icons: ^1.0.8
   intl: ^0.18.1
 
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
   flutter_lints: ^5.0.0
-
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
-
   uses-material-design: true
-  assets:  
+  assets:
     - lib/assets/logo.png
     - lib/assets/google_logo.png
- 
+
+flutter_icons:
+  android: true
+  ios: false
+  image_path: "lib/assets/logo.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#4285F4"
